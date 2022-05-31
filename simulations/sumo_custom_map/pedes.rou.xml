@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Wed 11 May 2022 09:50:28 AM PDT by Eclipse SUMO netedit Version 1.4.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="/home/hoangnv/ocean/gr1/week3/network.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/home/hoangnv/ocean/gr1/week3/network.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-internal-links value="false"/>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <route-files value="/home/hoangnv/ocean/gr1/week3/pedes.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <route edges="gneE3 gneE1 -gneE9 -gneE11 -gneE13 gneE15" color="yellow" id="route_0"/>
+    <route edges="E12 gneE3 -gneE5 gneE4 E16 E17" color="0,147,255" id="route_1"/>
+    <route edges="-E23 -gneE8 -gneE11 -gneE13 gneE14 E31 -gneE7 gneE5 -gneE0 E23 E12 E13 E14 E15 -gneE4 gneE7 E35 -E18" color="255,106,0" id="route_2"/>
+    <route edges="gneE6 -E13 gneE3 gneE1 E31 E32 E17 E18 -gneE15 gneE13 gneE11 gneE8" color="255,0,197" id="route_3"/>
+    <route edges="gneE0 gneE1 -gneE14 gneE13 gneE11 gneE9 -gneE14 gneE15 -E35 E32 -E16 -E15 -E14 -E13 -E12 -E23 -gneE8 gneE9 -gneE1 -gneE5 gneE7 E35 -gneE15 gneE14 -gneE9 -gneE11 -gneE13 gneE15" color="0,255,206" id="route_4"/>
+    <person id="person_0" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_1" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_10" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_11" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_12" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_13" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_14" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_15" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_16" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_17" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_18" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_19" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_2" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_20" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_21" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_22" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_23" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_24" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_25" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_26" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_27" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_28" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_29" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_3" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_30" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_31" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_32" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_33" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_34" depart="0.00">
+        <walk route="route_0" arrivalPos="0.00"/>
+    </person>
+    <person id="person_4" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_5" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_6" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_7" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_8" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <person id="person_9" depart="0.00">
+        <walk route="route_1" arrivalPos="0.00"/>
+    </person>
+    <vehicle id="vehicle_0" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_1" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_10" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_11" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_12" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_13" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_14" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_15" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_16" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_17" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_18" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_19" depart="0.00" route="route_3"/>
+    <vehicle id="vehicle_2" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_20" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_21" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_22" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_23" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_24" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_25" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_26" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_27" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_28" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_29" depart="0.00" route="route_4"/>
+    <vehicle id="vehicle_3" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_4" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_5" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_6" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_7" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_8" depart="0.00" route="route_2"/>
+    <vehicle id="vehicle_9" depart="0.00" route="route_2"/>
+</routes>
