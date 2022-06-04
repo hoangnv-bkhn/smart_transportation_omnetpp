@@ -1,4 +1,3 @@
-file 2813 1654278867                                            
 version 3
 run General-0-20220603-10:54:18-14013
 attr configname General
@@ -75,6 +74,6 @@ config *.node[*0].veinsmobility.accidentCount 0
 
 vector 0 myTestNetwork.node[0].veinsmobility posx ETV
 vector 1 myTestNetwork.node[0].veinsmobility posy ETV
-0	2788 12 21 21 1 1 1 30.1 30.1 30.1 906.01
-1	2800 12 21 21 1 1 1 26.6 26.6 26.6 707.56
+0	21	1	30.1
+1	21	1	26.6
 

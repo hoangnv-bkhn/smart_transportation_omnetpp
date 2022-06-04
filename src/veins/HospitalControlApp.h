@@ -19,6 +19,7 @@ public:
     void initialize(int stage) override;
     void finish() override;
     double getAvailablePerdestrian(std::string crossId, double _time);
+    double getVeloOfPerdestrian(std::string crossId, double _time);
 
 protected:
     void onBSM(DemoSafetyMessage* bsm) override;

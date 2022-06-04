@@ -32,8 +32,8 @@
 -->
 
 <launch>
-    <copy file="line.net.xml" />
-    <copy file="path.rou.xml" />
+    <copy file="line2.net.xml" />
+    <copy file="line2.rou.xml" />
     <copy file="square.poly.xml" />
     <copy file="square.sumocfg" type="config" />
 </launch>

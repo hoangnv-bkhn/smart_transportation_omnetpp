@@ -15,7 +15,7 @@ public:
 
 //    inline static veins::TraCIMobility* activation = NULL;
     static veins::TraCIMobility* activation;
-    static constexpr const char* DELTA_T = 0;
+    static constexpr const double DELTA_T = 1;
 
     Constant();
     virtual ~Constant();
