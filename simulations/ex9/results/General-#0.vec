@@ -1,8 +1,8 @@
 version 3
-run General-0-20220603-10:54:18-14013
+run General-0-20220609-07:37:37-3854
 attr configname General
-attr datetime 20220603-10:54:18
-attr datetimef 20220603-105418
+attr datetime 20220609-07:37:37
+attr datetimef 20220609-073737
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network myTestNetwork
-attr processid 14013
+attr processid 3854
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -74,6 +74,17 @@ config *.node[*0].veinsmobility.accidentCount 0
 
 vector 0 myTestNetwork.node[0].veinsmobility posx ETV
 vector 1 myTestNetwork.node[0].veinsmobility posy ETV
+vector 2 myTestNetwork.node[0].veinsmobility speed ETV
 0	21	1	30.1
+0	104	2	32.7
 1	21	1	26.6
+1	104	2	26.6
+2	104	2	2.6
+vector 3 myTestNetwork.node[0].veinsmobility acceleration ETV
+vector 4 myTestNetwork.node[0].veinsmobility co2emission ETV
+0	188	3	37.9
+1	188	3	26.6
+2	188	3	5.2
+3	188	3	2.6
+4	188	3	4.632157209559
 

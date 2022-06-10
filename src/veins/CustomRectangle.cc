@@ -103,10 +103,10 @@ bool CustomRectangle::checkInside(veins::Coord I) {
     double DAI = triangleArea(D, A, I);
     double ABCD = rectangleArea();
 //    EV << ABI + BCI + CDI + DAI <<endl;
-    EV << A <<endl;
-    EV << B <<endl;
-    EV << C <<endl;
-    EV << D <<endl;
+//    EV << A <<endl;
+//    EV << B <<endl;
+//    EV << C <<endl;
+//    EV << D <<endl;
     if (ABI + BCI + CDI + DAI == ABCD) return true;
     else return false;
 }

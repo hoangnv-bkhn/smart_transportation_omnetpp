@@ -5,6 +5,7 @@
 #include "veins/modules/application/ieee80211p/DemoBaseApplLayer.h"
 #include "veins/modules/application/traci/TraCIDemo11p.h"
 #include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
+#include "veins/modules/mobility/traci/TraCIConnection.h"
 
 using namespace omnetpp;
 

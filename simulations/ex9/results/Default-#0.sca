@@ -1,16 +1,16 @@
 version 3
-run General-0-20220609-07:37:37-3854
-attr configname General
-attr datetime 20220609-07:37:37
-attr datetimef 20220609-073737
-attr experiment General
+run Default-0-20220609-10:22:37-39468
+attr configname Default
+attr datetime 20220609-10:22:37
+attr datetimef 20220609-102237
+attr experiment Default
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network myTestNetwork
-attr processid 3854
+attr processid 39468
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -145,7 +145,7 @@ attr unit s
 par myTestNetwork.node[0].appl appName "\"Hospital Veins!\""
 scalar myTestNetwork.node[0].appl generatedWSMs 0
 scalar myTestNetwork.node[0].appl receivedWSMs 0
-scalar myTestNetwork.node[0].appl generatedBSMs 3
+scalar myTestNetwork.node[0].appl generatedBSMs 1
 scalar myTestNetwork.node[0].appl receivedBSMs 0
 scalar myTestNetwork.node[0].appl generatedWSAs 0
 scalar myTestNetwork.node[0].appl receivedWSAs 0
@@ -189,7 +189,7 @@ par myTestNetwork.node[0].nic.phy80211p ccaThreshold -65dBm
 attr unit dBm
 par myTestNetwork.node[0].nic.phy80211p collectCollisionStatistics false
 par myTestNetwork.node[0].nic.phy80211p allowTxDuringRx false
-scalar myTestNetwork.node[0].nic.phy80211p busyTime 8.3809196418875e-05
+scalar myTestNetwork.node[0].nic.phy80211p busyTime 0
 par myTestNetwork.node[0].nic.mac1609_4 typename "\"org.car2x.veins.modules.mac.ieee80211p.Mac1609_4\""
 par myTestNetwork.node[0].nic.mac1609_4 notAffectedByHostState false
 par myTestNetwork.node[0].nic.mac1609_4 headerLength 0bit
@@ -214,8 +214,8 @@ par myTestNetwork.node[0].nic.mac1609_4 useAcks false
 par myTestNetwork.node[0].nic.mac1609_4 frameErrorRate 0
 par myTestNetwork.node[0].nic.mac1609_4 ackErrorRate 0
 scalar myTestNetwork.node[0].nic.mac1609_4 ReceivedUnicastPackets 0
-scalar myTestNetwork.node[0].nic.mac1609_4 ReceivedBroadcasts 2
-scalar myTestNetwork.node[0].nic.mac1609_4 SentPackets 5
+scalar myTestNetwork.node[0].nic.mac1609_4 ReceivedBroadcasts 0
+scalar myTestNetwork.node[0].nic.mac1609_4 SentPackets 1
 scalar myTestNetwork.node[0].nic.mac1609_4 SentAcknowledgements 0
 scalar myTestNetwork.node[0].nic.mac1609_4 RetriesExceeded 0
 scalar myTestNetwork.node[0].nic.mac1609_4 SNIRLostPackets 0
@@ -223,23 +223,23 @@ scalar myTestNetwork.node[0].nic.mac1609_4 RXTXLostPackets 0
 scalar myTestNetwork.node[0].nic.mac1609_4 TotalLostPackets 0
 scalar myTestNetwork.node[0].nic.mac1609_4 DroppedPacketsInMac 0
 scalar myTestNetwork.node[0].nic.mac1609_4 TooLittleTime 0
-scalar myTestNetwork.node[0].nic.mac1609_4 TimesIntoBackoff 6
-scalar myTestNetwork.node[0].nic.mac1609_4 SlotsBackoff 9
+scalar myTestNetwork.node[0].nic.mac1609_4 TimesIntoBackoff 2
+scalar myTestNetwork.node[0].nic.mac1609_4 SlotsBackoff 3
 scalar myTestNetwork.node[0].nic.mac1609_4 NumInternalContention 0
-scalar myTestNetwork.node[0].nic.mac1609_4 totalBusyTime 0.000468
+scalar myTestNetwork.node[0].nic.mac1609_4 totalBusyTime 8.9e-05
 scalar myTestNetwork.node[0].nic.mac1609_4 retriesExceeded:count 0
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigRetriesExceeded
 scalar myTestNetwork.node[0].nic.mac1609_4 sentAcks:count 0
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigSentAck
-scalar myTestNetwork.node[0].nic.mac1609_4 sentPackets:count 5
+scalar myTestNetwork.node[0].nic.mac1609_4 sentPackets:count 1
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigSentPacket
 scalar myTestNetwork.node[0].nic.mac1609_4 collisions:count 0
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigCollision
-scalar myTestNetwork.node[0].nic.mac1609_4 channelBusy:timeavg 0.00022334573657409
+scalar myTestNetwork.node[0].nic.mac1609_4 channelBusy:timeavg 0.00085393267981568
 attr recordingmode timeavg
 attr source org_car2x_veins_modules_mac_sigChannelBusy
 par myTestNetwork.node[0].nic typename "\"org.car2x.veins.modules.nic.Nic80211p\""
@@ -263,12 +263,10 @@ attr unit s
 par myTestNetwork.node[0].veinsmobility accidentInterval "uniform(30s, 60s)"
 attr unit s
 scalar myTestNetwork.node[0].veinsmobility startTime 1
-scalar myTestNetwork.node[0].veinsmobility totalTime 2
-scalar myTestNetwork.node[0].veinsmobility stopTime 3.1000082034
-scalar myTestNetwork.node[0].veinsmobility minSpeed 2.6
-scalar myTestNetwork.node[0].veinsmobility maxSpeed 5.2
-scalar myTestNetwork.node[0].veinsmobility totalDistance 7.8
-scalar myTestNetwork.node[0].veinsmobility totalCO2Emission 4.632157209559
+scalar myTestNetwork.node[0].veinsmobility totalTime 0
+scalar myTestNetwork.node[0].veinsmobility stopTime 1.104223672549
+scalar myTestNetwork.node[0].veinsmobility totalDistance 0
+scalar myTestNetwork.node[0].veinsmobility totalCO2Emission 0
 par myTestNetwork.node[0] typename "\"org.car2x.veins.nodes.Car\""
 par myTestNetwork.node[0] applType "\"AGVControlApp\""
 par myTestNetwork.node[0] nicType "\"Nic80211p\""
@@ -293,9 +291,9 @@ attr unit bit
 par myTestNetwork.rsu[0].appl wsaInterval 1s
 attr unit s
 scalar myTestNetwork.rsu[0].appl generatedWSMs 0
-scalar myTestNetwork.rsu[0].appl receivedWSMs 2
+scalar myTestNetwork.rsu[0].appl receivedWSMs 1
 scalar myTestNetwork.rsu[0].appl generatedBSMs 0
-scalar myTestNetwork.rsu[0].appl receivedBSMs 2
+scalar myTestNetwork.rsu[0].appl receivedBSMs 0
 scalar myTestNetwork.rsu[0].appl generatedWSAs 0
 scalar myTestNetwork.rsu[0].appl receivedWSAs 0
 par myTestNetwork.rsu[0].nic.phy80211p typename "\"org.car2x.veins.modules.phy.PhyLayer80211p\""
@@ -338,7 +336,7 @@ par myTestNetwork.rsu[0].nic.phy80211p ccaThreshold -65dBm
 attr unit dBm
 par myTestNetwork.rsu[0].nic.phy80211p collectCollisionStatistics false
 par myTestNetwork.rsu[0].nic.phy80211p allowTxDuringRx false
-scalar myTestNetwork.rsu[0].nic.phy80211p busyTime 9.2902979961192e-05
+scalar myTestNetwork.rsu[0].nic.phy80211p busyTime 7.9693998768257e-05
 par myTestNetwork.rsu[0].nic.mac1609_4 typename "\"org.car2x.veins.modules.mac.ieee80211p.Mac1609_4\""
 par myTestNetwork.rsu[0].nic.mac1609_4 notAffectedByHostState false
 par myTestNetwork.rsu[0].nic.mac1609_4 headerLength 0bit
@@ -363,8 +361,8 @@ par myTestNetwork.rsu[0].nic.mac1609_4 useAcks false
 par myTestNetwork.rsu[0].nic.mac1609_4 frameErrorRate 0
 par myTestNetwork.rsu[0].nic.mac1609_4 ackErrorRate 0
 scalar myTestNetwork.rsu[0].nic.mac1609_4 ReceivedUnicastPackets 0
-scalar myTestNetwork.rsu[0].nic.mac1609_4 ReceivedBroadcasts 4
-scalar myTestNetwork.rsu[0].nic.mac1609_4 SentPackets 2
+scalar myTestNetwork.rsu[0].nic.mac1609_4 ReceivedBroadcasts 1
+scalar myTestNetwork.rsu[0].nic.mac1609_4 SentPackets 1
 scalar myTestNetwork.rsu[0].nic.mac1609_4 SentAcknowledgements 0
 scalar myTestNetwork.rsu[0].nic.mac1609_4 RetriesExceeded 0
 scalar myTestNetwork.rsu[0].nic.mac1609_4 SNIRLostPackets 0
@@ -372,23 +370,23 @@ scalar myTestNetwork.rsu[0].nic.mac1609_4 RXTXLostPackets 0
 scalar myTestNetwork.rsu[0].nic.mac1609_4 TotalLostPackets 0
 scalar myTestNetwork.rsu[0].nic.mac1609_4 DroppedPacketsInMac 0
 scalar myTestNetwork.rsu[0].nic.mac1609_4 TooLittleTime 0
-scalar myTestNetwork.rsu[0].nic.mac1609_4 TimesIntoBackoff 4
-scalar myTestNetwork.rsu[0].nic.mac1609_4 SlotsBackoff 1
+scalar myTestNetwork.rsu[0].nic.mac1609_4 TimesIntoBackoff 1
+scalar myTestNetwork.rsu[0].nic.mac1609_4 SlotsBackoff 0
 scalar myTestNetwork.rsu[0].nic.mac1609_4 NumInternalContention 0
-scalar myTestNetwork.rsu[0].nic.mac1609_4 totalBusyTime 0.000466
+scalar myTestNetwork.rsu[0].nic.mac1609_4 totalBusyTime 8.8e-05
 scalar myTestNetwork.rsu[0].nic.mac1609_4 retriesExceeded:count 0
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigRetriesExceeded
 scalar myTestNetwork.rsu[0].nic.mac1609_4 sentAcks:count 0
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigSentAck
-scalar myTestNetwork.rsu[0].nic.mac1609_4 sentPackets:count 2
+scalar myTestNetwork.rsu[0].nic.mac1609_4 sentPackets:count 1
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigSentPacket
 scalar myTestNetwork.rsu[0].nic.mac1609_4 collisions:count 0
 attr recordingmode count
 attr source org_car2x_veins_modules_mac_sigCollision
-scalar myTestNetwork.rsu[0].nic.mac1609_4 channelBusy:timeavg 0.00015032218285387
+scalar myTestNetwork.rsu[0].nic.mac1609_4 channelBusy:timeavg 8.0625420567634e-05
 attr recordingmode timeavg
 attr source org_car2x_veins_modules_mac_sigChannelBusy
 par myTestNetwork.rsu[0].nic typename "\"org.car2x.veins.modules.nic.Nic80211p\""

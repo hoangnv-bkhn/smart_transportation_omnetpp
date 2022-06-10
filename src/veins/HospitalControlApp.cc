@@ -81,7 +81,7 @@ void HospitalControlApp::initialize(int stage)
 //        EV << crossings.at(1).id;
 //        EV << crossings[1].rec.A.x;
 
-        double a = getAvailablePerdestrian(":J1_c0_0", 2);
+//        double a = getAvailablePerdestrian(":J1_c0_0", 2);
 
         sendBeacon= new cMessage("send Beacon");
     }
@@ -111,8 +111,8 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
     cPacket* enc = wsm->getEncapsulatedPacket();
 
     if(TraCIDemo11pMessage* bc = dynamic_cast<TraCIDemo11pMessage*>(enc)){
-        if(strcmp(Constant::FIRST, bc->getDemoData()) == 0){
-            EV << "my message = " <<bc->getDemoData()<<" from "<<bc->getSenderAddress()<<endl;
+//        if(strcmp(Constant::FIRST, bc->getDemoData()) == 0){
+            EV << "My message = " <<bc->getDemoData()<<" from "<<bc->getSenderAddress()<<endl;
             if(sendBeacon != NULL){
                 if (sendBeacon->isScheduled())
                 {
@@ -136,8 +136,11 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
                 for (auto elem: allPeople) {
                     std::string personId = elem;
                     Coord peoplePosition = traci->getPersonPosition(personId);
+                    std::pair<double,double> coordTraCI = traci->getTraCIXY(peoplePosition);
                     EV << personId + ' ' ;
                     EV << peoplePosition;
+//                    EV << coordTraCI.first + ' ';
+//                    EV << coordTraCI.second + ' ';
                     EV << ' ' +to_string(simTime().dbl()) << std::endl;
 
                     for(int i = 0; i < crossings.size(); i++){
@@ -166,7 +169,7 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
                 populateWSM(WSM);
                 send(WSM,lowerLayerOut);
             }
-        }
+//        }
     }
 }
 
@@ -239,7 +242,10 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, double _tim
                 }
             }
             int n = tmp.size();
-            sum += sqrt(pow(get<1>(tmp[n-1]) - get<1>(tmp[0])) + pow(get<2>(tmp[n-1]) - get<2>(tmp[0]))) / (get<3>(tmp[n-1]) - get<3>(tmp[0]));
+            sum += sqrt(
+                    (get<1>(tmp[n-1]) - get<1>(tmp[0]))*(get<1>(tmp[n-1]) - get<1>(tmp[0]))
+                    + (get<2>(tmp[n-1]) - get<2>(tmp[0]))*(get<2>(tmp[n-1]) - get<2>(tmp[0]))
+                    ) / (get<3>(tmp[n-1]) - get<3>(tmp[0]));
         }
     }
     double averageSpeed = sum / numPeople;

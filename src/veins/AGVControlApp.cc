@@ -1,6 +1,7 @@
 #include "AGVControlApp.h"
 #include "Constant.h"
 #include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
+#include "veins/modules/mobility/traci/TraCIConnection.h"
 
 using namespace veins;
 
@@ -14,12 +15,17 @@ void AGVControlApp::initialize(int stage)
         if(Constant::activation == NULL){
             Constant::activation = mobility;
         }
+        traci = Constant::activation->getCommandInterface();
 
         carBeacon = new TraCIDemo11pMessage();
         std::string content = std::to_string(simTime().dbl()) + " ";
         curPosition = mobility->getPositionAt(simTime());
 
-        content = content + std::to_string(curPosition.x) + " " + std::to_string(curPosition.y);
+        std::pair<double,double> coordTraCI = traci->getTraCIXY(curPosition);
+//        EV << coordTraCI.first << coordTraCI.second << endl;
+
+//        content = content + std::to_string(curPosition.x) + " " + std::to_string(curPosition.y);
+        content = content + std::to_string(coordTraCI.first) + " " + std::to_string(coordTraCI.second);
         content = content + /*"Lid"*/ " " + traciVehicle->getLaneId();
         content = content + /*"L.P"*/ " " + std::to_string(traciVehicle->getLanePosition());
         content = content + /*"velo:"*/ " " + std::to_string(traciVehicle->getSpeed())
@@ -86,8 +92,33 @@ void AGVControlApp::handleSelfMsg(cMessage* msg)
     //if(msg == sendBeacon)
     {
         TraCIDemo11pMessage* carBeacon = new TraCIDemo11pMessage();
-        carBeacon->setDemoData(Constant::FIRST);
+
+        if(Constant::activation == NULL){
+            Constant::activation = mobility;
+        }
+        traci = Constant::activation->getCommandInterface();
+
+//        carBeacon = new TraCIDemo11pMessage();
+        std::string content = std::to_string(simTime().dbl()) + " ";
+        curPosition = mobility->getPositionAt(simTime());
+
+        std::pair<double,double> coordTraCI = traci->getTraCIXY(curPosition);
+
+//        content = content + std::to_string(curPosition.x) + " " + std::to_string(curPosition.y) + " ";
+        content = content + std::to_string(coordTraCI.first) + " " + std::to_string(coordTraCI.second);
+        content = content + /*"Lid"*/ " " + traciVehicle->getLaneId();
+        content = content + /*"L.P"*/ " " + std::to_string(traciVehicle->getLanePosition());
+        content = content + /*"velo:"*/ " " + std::to_string(traciVehicle->getSpeed())
+                        + " " + std::to_string(traciVehicle->getAcceleration());
+        content = content + /*"dis:"*/ " " + std::to_string(traciVehicle->getDistanceTravelled());
+//        EV << Constant::FIRST <<endl;
+
+        carBeacon->setDemoData(content.c_str());
         carBeacon->setSenderAddress(myId);
+
+//        carBeacon->setDemoData(Constant::FIRST);
+//        carBeacon->setSenderAddress(myId);
+
         BaseFrame1609_4* WSM = new BaseFrame1609_4();
         WSM->encapsulate(carBeacon);
         populateWSM(WSM);

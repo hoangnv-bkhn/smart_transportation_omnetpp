@@ -37,7 +37,6 @@
     <input>
         <net-file value="line2.net.xml"/>
         <route-files value="line2.rou.xml"/>
-        <additional-files value="square.poly.xml"/>
     </input>
 
 </configuration>
