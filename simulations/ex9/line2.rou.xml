@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Fri 03 Jun 2022 07:19:18 AM PDT by Eclipse SUMO netedit Version 1.4.0
+<!-- generated on Tue 14 Jun 2022 07:53:13 AM PDT by Eclipse SUMO netedit Version 1.4.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -51,9 +51,6 @@
         <walk route="route_0" arrivalPos="0.00"/>
     </person>
     <person id="person_2" depart="0.00">
-        <walk route="route_0" arrivalPos="0.00"/>
-    </person>
-    <person id="person_3" depart="0.00">
         <walk route="route_0" arrivalPos="0.00"/>
     </person>
     <vehicle id="vehicle_0" depart="0.00" route="route_1"/>

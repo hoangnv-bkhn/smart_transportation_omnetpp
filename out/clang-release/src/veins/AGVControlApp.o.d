@@ -53,7 +53,7 @@
   /home/hoangnv/ocean/veins/src/veins/modules/world/traci/trafficLight/TraCITrafficLightProgram.h \
   /home/hoangnv/ocean/veins/src/veins/modules/application/traci/TraCIDemo11p.h \
   /home/hoangnv/ocean/veins/src/veins/modules/application/traci/TraCIDemo11pMessage_m.h \
-  veins/Constant.h
+  veins/Constant.h veins/Crossing.h veins/CustomRectangle.h
 
 veins/AGVControlApp.h:
 
@@ -166,3 +166,7 @@ veins/AGVControlApp.h:
 /home/hoangnv/ocean/veins/src/veins/modules/application/traci/TraCIDemo11pMessage_m.h:
 
 veins/Constant.h:
+
+veins/Crossing.h:
+
+veins/CustomRectangle.h:

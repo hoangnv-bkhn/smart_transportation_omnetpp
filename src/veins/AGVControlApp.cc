@@ -24,8 +24,8 @@ void AGVControlApp::initialize(int stage)
         std::pair<double,double> coordTraCI = traci->getTraCIXY(curPosition);
 //        EV << coordTraCI.first << coordTraCI.second << endl;
 
-//        content = content + std::to_string(curPosition.x) + " " + std::to_string(curPosition.y);
-        content = content + std::to_string(coordTraCI.first) + " " + std::to_string(coordTraCI.second);
+        content = content + std::to_string(curPosition.x) + " " + std::to_string(curPosition.y);
+//        content = content + std::to_string(coordTraCI.first) + " " + std::to_string(coordTraCI.second);
         content = content + /*"Lid"*/ " " + traciVehicle->getLaneId();
         content = content + /*"L.P"*/ " " + std::to_string(traciVehicle->getLanePosition());
         content = content + /*"velo:"*/ " " + std::to_string(traciVehicle->getSpeed())

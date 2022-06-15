@@ -1,33 +1,35 @@
-file 21259 1655264138                                           
+file 2910 1654860154                                            
 version 3
-run Default-0-20220614-20:35:34-8695
-attr configname Default
-attr datetime 20220614-20:35:34
-attr datetimef 20220614-203534
-attr experiment Default
+run WithBeaconing-0-20220610-03:44:40-6915
+attr configname WithBeaconing
+attr datetime 20220610-03:44:40
+attr datetimef 20220610-034440
+attr experiment WithBeaconing
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network myTestNetwork
-attr processid 8695
+attr processid 6915
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 config image-path ../../../../../ocean/inet/images:../../../../../ocean/veins/images
+config *.rsu[*].appl.sendBeacons true
+config *.node[*].appl.sendBeacons true
 config cmdenv-express-mode true
 config cmdenv-autoflush true
-config cmdenv-status-frequency 0.1s
+config cmdenv-status-frequency 1s
 config **.cmdenv-log-level info
 config ned-path .
 config image-path ../../images
 config network myTestNetwork
 config debug-on-errors true
 config print-undisposed true
-config sim-time-limit 20s
+config sim-time-limit 3000s
 config **.scalar-recording true
 config **.vector-recording true
 config *.playgroundSizeX 300m
@@ -66,7 +68,7 @@ config *.node[*].applType "\"AGVControlApp\""
 config *.node[*].appl.headerLength "80 bit"
 config *.node[*].appl.sendBeacons false
 config *.node[*].appl.dataOnSch true
-config *.node[*].appl.beaconInterval 0.1s
+config *.node[*].appl.beaconInterval 1s
 config *.node[*].veinsmobility.x 100
 config *.node[*].veinsmobility.y 100
 config *.node[*].veinsmobility.z 0
@@ -75,12 +77,6 @@ config *.node[*0].veinsmobility.accidentCount 0
 
 vector 0 myTestNetwork.node[0].veinsmobility posx ETV
 vector 1 myTestNetwork.node[0].veinsmobility posy ETV
-vector 2 myTestNetwork.node[0].veinsmobility speed ETV
-vector 3 myTestNetwork.node[0].veinsmobility acceleration ETV
-vector 4 myTestNetwork.node[0].veinsmobility co2emission ETV
-4	2968 4434 56 7880 0.3 16.6 164 1.4589706581223 10.838302751781 552.39274180852 2846.5772259638
-3	7402 2267 56 7880 0.3 16.6 164 0 2.6 138.45455048816 358.70843634155
-2	9669 4466 8 7880 0.2 16.6 165 0.2570972159754 14.102552264791 1951.3265510545 25721.016747498
-1	14135 2664 3 7880 0.1 16.6 166 26.6 26.6 4415.6 117454.96
-0	16799 4459 3 7880 0.1 16.6 166 30.1 224.42752749221 18662.33916807 2729827.8782705
+0	2883 13 3 3 0.1 0.1 1 30.1 30.1 30.1 906.01
+1	2896 13 3 3 0.1 0.1 1 26.6 26.6 26.6 707.56
 

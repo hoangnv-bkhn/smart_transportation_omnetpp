@@ -9,6 +9,7 @@
 #include "veins/modules/application/traci/TraCIDemoRSU11p.h"
 #include "CustomRectangle.h"
 #include "Crossing.h"
+#include "Constant.h"
 
 using namespace omnetpp;
 

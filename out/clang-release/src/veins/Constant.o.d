@@ -35,7 +35,8 @@
   /home/hoangnv/ocean/veins/src/veins/base/utils/EnumBitset.h \
   /home/hoangnv/ocean/veins/src/veins/modules/mobility/traci/TraCIRegionOfInterest.h \
   /home/hoangnv/ocean/veins/src/veins/modules/mobility/traci/TraCICommandInterface.h \
-  /home/hoangnv/ocean/veins/src/veins/modules/world/traci/trafficLight/TraCITrafficLightProgram.h
+  /home/hoangnv/ocean/veins/src/veins/modules/world/traci/trafficLight/TraCITrafficLightProgram.h \
+  veins/Crossing.h veins/CustomRectangle.h
 
 veins/Constant.h:
 
@@ -110,3 +111,7 @@ veins/Constant.h:
 /home/hoangnv/ocean/veins/src/veins/modules/mobility/traci/TraCICommandInterface.h:
 
 /home/hoangnv/ocean/veins/src/veins/modules/world/traci/trafficLight/TraCITrafficLightProgram.h:
+
+veins/Crossing.h:
+
+veins/CustomRectangle.h:

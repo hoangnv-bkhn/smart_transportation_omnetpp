@@ -38,5 +38,13 @@
         <net-file value="line2.net.xml"/>
         <route-files value="line2.rou.xml"/>
     </input>
+    
+    <time>
+    	<step-length value="0.1"/>
+	</time>
+
+	<processing>
+     	<default.action-step-length value="0.1"/>
+	</processing>
 
 </configuration>

@@ -64,35 +64,21 @@ double CustomRectangle::rectangleArea() {
 
 //double CustomRectangle::triangleArea(inet::Coord A, inet::Coord B, inet::Coord C) {
 double CustomRectangle::triangleArea(veins::Coord A, veins::Coord B, veins::Coord C) {
-//    double p = A.x * (B.y - C.y);
-//    double q = B.x * (C.y - A.y);
-//    double r = C.x * (A.y - B.y);
-//    return fabs((p + q + r) / 2);
+    double p = A.x * (B.y - C.y);
+    double q = B.x * (C.y - A.y);
+    double r = C.x * (A.y - B.y);
+    return fabs((p + q + r) / 2);
 
 //    double p = (B.x - A.x)*(C.y - A.y);
 //    double q = (C.x - A.x)*(B.y - A.y);
 //    return fabs((p - q) / 2);
 
-    double x = A.distance(B);
-    double y = B.distance(C);
-    double z = C.distance(A);
-    double p = (x + y + z) / 2.0;
-    double S = sqrt(p*(p - x)*(p - y)*(p - z));
-//    EV << S <<endl;
-    return S;
-
-//    double x=B.x-A.x;
-//    double y=B.y-A.y;
-//    double z=C.x-B.x;
-//    double t=C.y-B.y;
-//    double s=A.x-C.x;
-//    double r=A.y-C.y;
-//    double AB= sqrt(x*x+y*y);
-//    double BC= sqrt(z*z+t*t);
-//    double CA= sqrt(s*s+r*r);
-//    double p=(AB+BC+CA)/2;
-//    double S= sqrt(p*(p-AB)*(p-BC)*(p-CA));
-//    EV << S <<endl;
+//    double x = A.distance(B);
+//    double y = B.distance(C);
+//    double z = C.distance(A);
+//    double p = (x + y + z) / 2.0;
+//    double S = sqrt(p*(p - x)*(p - y)*(p - z));
+////    EV << S <<endl;
 //    return S;
 }
 
@@ -102,13 +88,16 @@ bool CustomRectangle::checkInside(veins::Coord I) {
     double CDI = triangleArea(C, D, I);
     double DAI = triangleArea(D, A, I);
     double ABCD = rectangleArea();
-//    EV << ABI + BCI + CDI + DAI <<endl;
-//    EV << A <<endl;
-//    EV << B <<endl;
-//    EV << C <<endl;
-//    EV << D <<endl;
-    if (ABI + BCI + CDI + DAI == ABCD) return true;
-    else return false;
+    double S = ABI + BCI + CDI + DAI;
+//    EV <<"Tong dien tich: " <<S <<endl;
+//    EV <<"Dien tich: " <<ABCD <<endl;
+    if (fabs(S - ABCD) < 0.01) {
+        return true;
+    }
+    else{
+//        EV <<"Tong dien tich: " <<S <<" Dien tich: "<< ABCD  << " Diem: "<<I <<endl;
+        return false;
+    }
 }
 
 CustomRectangle::~CustomRectangle() {
