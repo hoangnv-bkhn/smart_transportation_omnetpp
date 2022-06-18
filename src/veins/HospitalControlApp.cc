@@ -110,13 +110,13 @@ void HospitalControlApp::finish()
     double b = getVeloOfPerdestrian(":J1_c0_0", 9);
     EV << "Van toc trung binh: "<< b <<endl;
 
-    for (auto elem : crossings[1].peoples) {
-        EV << "debug111" << endl;
-        EV << get<0>(elem) << " " << get<1>(elem) << " " << get<2>(elem) << " " << get<3>(elem) << endl;
-    }
+//    for (auto elem : crossings[1].peoples) {
+//        EV << "debug111" << endl;
+//        EV << get<0>(elem) << " " << get<1>(elem) << " " << get<2>(elem) << " " << get<3>(elem) << endl;
+//    }
 
     double t = getDisperseTime(":J1_c0_0", 50, 51);
-    EV << t << endl;
+    EV << "Disperse time: " << t << endl;
 
     // statistics recording goes here
 }
@@ -347,17 +347,21 @@ double HospitalControlApp::getDisperseTime(std::string crossId, double _t, doubl
 
     // Duyet tu moc thoi gian lon nhat
     for (int j = k; j >= k - _t; j--) {
+
         // Toa do cua nguoi di bo tai moc tgian j
         std::vector<std::tuple<std::string, double, double, double>> Aj;
         for (auto elem : C) {
-            if (get<3>(elem) == j / 10 + 0.0001) {
+            if (fabs(get<3>(elem) - (j / 10 + 0.0001)) < 0.01) {
                 Aj.push_back(elem);
             }
         }
 
+//        EV << Aj.size() << endl;
+
         // Neu tai moc j co nguoi
         // Duyet tu moc tgian nho nhat de tim thoi diem nguoi do vao crossing
         if (Aj.size() != 0) {
+//            EV << appearance << endl;
             appearance++;
             for (int u = k - _t; u <= j; u++) {
 
@@ -366,7 +370,7 @@ double HospitalControlApp::getDisperseTime(std::string crossId, double _t, doubl
                 // Toa do cua nguoi di bo tai moc tgian u
                 std::vector<std::tuple<std::string, double, double, double>> Au;
                 for (auto elem : C) {
-                    if (get<3>(elem) == u / 10 + 0.0001) {
+                    if (fabs(get<3>(elem) - (u / 10 + 0.0001)) < 0.01) {
                         Au.push_back(elem);
                     }
                 }
@@ -380,6 +384,8 @@ double HospitalControlApp::getDisperseTime(std::string crossId, double _t, doubl
                             double d = sqrt((get<1>(elem) - get<1>(elem2)) * (get<1>(elem) - get<1>(elem2))
                                     + (get<2>(elem) - get<2>(elem2)) * (get<2>(elem) - get<2>(elem2)));
                             double v = d / (get<3>(elem2) - get<3>(elem));
+//                            EV << d << endl;
+//                            EV << v << endl;
                             sum = sum + 6.4 / 2 / v;
                         }
                     }

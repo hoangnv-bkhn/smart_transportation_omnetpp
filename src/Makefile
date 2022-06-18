@@ -1,13 +1,13 @@
 #
-# OMNeT++/OMNEST Makefile for week9
+# OMNeT++/OMNEST Makefile for VANETTutorials
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -KINET_PROJ=../../inet -KVEINS_PROJ=../../veins -DINET_IMPORT -DVEINS_IMPORT -I$$\(INET_PROJ\)/src -I$$\(VEINS_PROJ\)/src -I. -L$$\(INET_PROJ\)/src -L$$\(VEINS_PROJ\)/src -lINET$$\(D\) -lveins$$\(D\)
+#  opp_makemake -f --deep -KINET_PROJ=/home/hoangnv/ocean/inet -KVEINS_PROJ=/home/hoangnv/ocean/veins -DINET_IMPORT -DVEINS_IMPORT -I$$\(INET_PROJ\)/src -I$$\(VEINS_PROJ\)/src -I. -L$$\(INET_PROJ\)/src -L$$\(VEINS_PROJ\)/src -lINET$$\(D\) -lveins$$\(D\)
 #
 
 # Name of target to be created (-o option)
 TARGET_DIR = .
-TARGET_NAME = week9$(D)
+TARGET_NAME = VANETTutorials$(D)
 TARGET = $(TARGET_NAME)$(EXE_SUFFIX)
 TARGET_IMPLIB = $(TARGET_NAME)$(IMPLIB_SUFFIX)
 TARGET_IMPDEF = $(TARGET_NAME)$(IMPDEF_SUFFIX)
@@ -57,8 +57,8 @@ MSGFILES = \
 SMFILES =
 
 # Other makefile variables (-K)
-INET_PROJ=../../inet
-VEINS_PROJ=../../veins
+INET_PROJ=/home/hoangnv/ocean/inet
+VEINS_PROJ=/home/hoangnv/ocean/veins
 
 #------------------------------------------------------------------------------
 
