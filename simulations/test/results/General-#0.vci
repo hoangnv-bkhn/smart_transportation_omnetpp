@@ -1,5 +1,5 @@
-file 3649 1653099539                                            
-version 3
+file 3649 1655436838                                            
+version 2
 run General-0-20220520-19:17:35-3229
 attr configname General
 attr datetime 20220520-19:17:35
@@ -74,13 +74,12 @@ config *.node[*].veinsmobility.setHostSpeed false
 config *.node[*0].veinsmobility.accidentCount 0
 
 vector 0 myTestNetwork.node[0].veinsmobility posx ETV
-vector 1 myTestNetwork.node[0].veinsmobility posy ETV
-vector 2 myTestNetwork.node[0].veinsmobility speed ETV
-vector 3 myTestNetwork.node[0].veinsmobility acceleration ETV
-vector 4 myTestNetwork.node[0].veinsmobility co2emission ETV
 0	2960 150 21 776 1 10 10 123.4 124.95447525683 1235.5544752568 152661.66088671
+vector 1 myTestNetwork.node[0].veinsmobility posy ETV
 1	3110 150 21 776 1 10 10 39.3 123.51088101412 771.00263101412 68766.869166697
+vector 2 myTestNetwork.node[0].veinsmobility speed ETV
 2	3260 123 104 776 2 10 9 2.6 15.6 84.59175 955.4950226875
+vector 3 myTestNetwork.node[0].veinsmobility acceleration ETV
 3	3383 104 188 776 3 10 8 -4.5 2.6 2.89725 75.5160575625
-4	3487 161 188 776 3 10 8 0.973 11.988212658094 44.275086525747 378.69461651024
-
+vector 4 myTestNetwork.node[0].veinsmobility co2emission ETV
+4	3487 162 188 776 3 10 8 0.973 11.988212658094 44.275086525747 378.69461651024

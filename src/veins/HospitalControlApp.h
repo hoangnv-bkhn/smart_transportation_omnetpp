@@ -21,6 +21,7 @@ public:
     void finish() override;
     double getAvailablePerdestrian(std::string crossId, double _time);
     double getVeloOfPerdestrian(std::string crossId, double _time);
+    double getDisperseTime(std::string crossId, double _t, double k);
 
 protected:
     void onBSM(DemoSafetyMessage* bsm) override;

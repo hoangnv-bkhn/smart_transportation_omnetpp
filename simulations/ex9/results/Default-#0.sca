@@ -1,8 +1,8 @@
 version 3
-run Default-0-20220614-20:35:34-8695
+run Default-0-20220618-08:47:41-3555
 attr configname Default
-attr datetime 20220614-20:35:34
-attr datetimef 20220614-203534
+attr datetime 20220618-08:47:41
+attr datetimef 20220618-084741
 attr experiment Default
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,13 +10,13 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network myTestNetwork
-attr processid 8695
+attr processid 3555
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-config image-path ../../../../../ocean/inet/images:../../../../../ocean/veins/images
+config image-path ../../../inet/images:../../../veins/images
 config cmdenv-express-mode true
 config cmdenv-autoflush true
 config cmdenv-status-frequency 0.1s
@@ -104,7 +104,7 @@ par myTestNetwork.node[0].nic.phy80211p usePropagationDelay true
 par myTestNetwork.node[0].nic.phy80211p noiseFloor -98dBm
 attr unit dBm
 par myTestNetwork.node[0].nic.phy80211p useNoiseFloor true
-par myTestNetwork.node[0].nic.phy80211p antenna "<Antenna type=\"SampledAntenna1D\" id=\"monopole\">...</Antenna> at /home/hoangnv/omnetpp-6.0/workspace1/VANETTutorials/simulations/ex9//antenna.xml:35"
+par myTestNetwork.node[0].nic.phy80211p antenna "<Antenna type=\"SampledAntenna1D\" id=\"monopole\">...</Antenna> at /home/netero/workspace/week9/simulations/ex9//antenna.xml:35"
 par myTestNetwork.node[0].nic.phy80211p antennaOffsetX 0m
 attr unit m
 par myTestNetwork.node[0].nic.phy80211p antennaOffsetY 0m
@@ -113,8 +113,8 @@ par myTestNetwork.node[0].nic.phy80211p antennaOffsetZ 1.895m
 attr unit m
 par myTestNetwork.node[0].nic.phy80211p antennaOffsetYaw 0rad
 attr unit rad
-par myTestNetwork.node[0].nic.phy80211p analogueModels "<root>...</root> at /home/hoangnv/omnetpp-6.0/workspace1/VANETTutorials/simulations/ex9//config.xml:34"
-par myTestNetwork.node[0].nic.phy80211p decider "<root>...</root> at /home/hoangnv/omnetpp-6.0/workspace1/VANETTutorials/simulations/ex9//config.xml:34"
+par myTestNetwork.node[0].nic.phy80211p analogueModels "<root>...</root> at /home/netero/workspace/week9/simulations/ex9//config.xml:34"
+par myTestNetwork.node[0].nic.phy80211p decider "<root>...</root> at /home/netero/workspace/week9/simulations/ex9//config.xml:34"
 par myTestNetwork.node[0].nic.phy80211p minPowerLevel -110dBm
 attr unit dBm
 par myTestNetwork.node[0].nic.phy80211p timeRXToTX 0s
@@ -215,9 +215,9 @@ scalar myTestNetwork.node[0].veinsmobility startTime 0.1
 scalar myTestNetwork.node[0].veinsmobility totalTime 16.5
 scalar myTestNetwork.node[0].veinsmobility stopTime 16.7
 scalar myTestNetwork.node[0].veinsmobility minSpeed 0.2570972159754
-scalar myTestNetwork.node[0].veinsmobility maxSpeed 14.102552264791
-scalar myTestNetwork.node[0].veinsmobility totalDistance 194.32752749221
-scalar myTestNetwork.node[0].veinsmobility totalCO2Emission 55.239274180852
+scalar myTestNetwork.node[0].veinsmobility maxSpeed 14.102517
+scalar myTestNetwork.node[0].veinsmobility totalDistance 194.32713781627
+scalar myTestNetwork.node[0].veinsmobility totalCO2Emission 55.239113311768
 par myTestNetwork.node[0] typename "\"org.car2x.veins.nodes.Car\""
 par myTestNetwork.node[0] applType "\"AGVControlApp\""
 par myTestNetwork.node[0] nicType "\"Nic80211p\""
@@ -265,7 +265,7 @@ par myTestNetwork.manager roiRoads "\"\""
 par myTestNetwork.manager roiRects "\"\""
 par myTestNetwork.manager penetrationRate 1
 par myTestNetwork.manager ignoreGuiCommands false
-par myTestNetwork.manager launchConfig "<launch>...</launch> at /home/hoangnv/omnetpp-6.0/workspace1/VANETTutorials/simulations/ex9//square.launchd.xml:34"
+par myTestNetwork.manager launchConfig "<launch>...</launch> at /home/netero/workspace/week9/simulations/ex9//square.launchd.xml:34"
 scalar myTestNetwork.manager roiArea 0
 par myTestNetwork.roadsCanvasVisualizer typename "\"org.car2x.veins.visualizer.roads.RoadsCanvasVisualizer\""
 par myTestNetwork.roadsCanvasVisualizer enabled true
@@ -304,7 +304,7 @@ par myTestNetwork.rsu[0].nic.phy80211p usePropagationDelay true
 par myTestNetwork.rsu[0].nic.phy80211p noiseFloor -98dBm
 attr unit dBm
 par myTestNetwork.rsu[0].nic.phy80211p useNoiseFloor true
-par myTestNetwork.rsu[0].nic.phy80211p antenna "<Antenna type=\"SampledAntenna1D\" id=\"monopole\">...</Antenna> at /home/hoangnv/omnetpp-6.0/workspace1/VANETTutorials/simulations/ex9//antenna.xml:35"
+par myTestNetwork.rsu[0].nic.phy80211p antenna "<Antenna type=\"SampledAntenna1D\" id=\"monopole\">...</Antenna> at /home/netero/workspace/week9/simulations/ex9//antenna.xml:35"
 par myTestNetwork.rsu[0].nic.phy80211p antennaOffsetX 0m
 attr unit m
 par myTestNetwork.rsu[0].nic.phy80211p antennaOffsetY 0m
@@ -313,8 +313,8 @@ par myTestNetwork.rsu[0].nic.phy80211p antennaOffsetZ 0m
 attr unit m
 par myTestNetwork.rsu[0].nic.phy80211p antennaOffsetYaw 0rad
 attr unit rad
-par myTestNetwork.rsu[0].nic.phy80211p analogueModels "<root>...</root> at /home/hoangnv/omnetpp-6.0/workspace1/VANETTutorials/simulations/ex9//config.xml:34"
-par myTestNetwork.rsu[0].nic.phy80211p decider "<root>...</root> at /home/hoangnv/omnetpp-6.0/workspace1/VANETTutorials/simulations/ex9//config.xml:34"
+par myTestNetwork.rsu[0].nic.phy80211p analogueModels "<root>...</root> at /home/netero/workspace/week9/simulations/ex9//config.xml:34"
+par myTestNetwork.rsu[0].nic.phy80211p decider "<root>...</root> at /home/netero/workspace/week9/simulations/ex9//config.xml:34"
 par myTestNetwork.rsu[0].nic.phy80211p minPowerLevel -110dBm
 attr unit dBm
 par myTestNetwork.rsu[0].nic.phy80211p timeRXToTX 0s

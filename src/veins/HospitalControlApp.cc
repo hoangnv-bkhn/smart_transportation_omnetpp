@@ -110,6 +110,13 @@ void HospitalControlApp::finish()
     double b = getVeloOfPerdestrian(":J1_c0_0", 9);
     EV << "Van toc trung binh: "<< b <<endl;
 
+    for (auto elem : crossings[1].peoples) {
+        EV << "debug111" << endl;
+        EV << get<0>(elem) << " " << get<1>(elem) << " " << get<2>(elem) << " " << get<3>(elem) << endl;
+    }
+
+    double t = getDisperseTime(":J1_c0_0", 50, 51);
+    EV << t << endl;
 
     // statistics recording goes here
 }
@@ -204,6 +211,8 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
 ////                         }
 //                    }
 //                }
+
+
 
                 TraCIDemo11pMessage* rsuBeacon = new TraCIDemo11pMessage();
 
@@ -316,6 +325,72 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, double _tim
     double averageSpeed = sum / numPeople;
 
     return averageSpeed;
+}
+
+double HospitalControlApp::getDisperseTime(std::string crossId, double _t, double k) {
+    int appearance = 0;
+    std::vector<std::string> Avail;
+    double sum;
+
+    // Tat ca toa do nguoi di bo duoc luu vao peoples cua crossing
+    std::vector<std::tuple<std::string, double, double, double>> C;
+    auto it = find_if(crossings.begin(), crossings.end(),
+            [&crossId](const Crossing& obj) {return obj.id.compare(crossId) == 0;});
+    if (it != crossings.end())
+    {
+        for (auto elem : it->peoples) {
+            C.push_back(elem);
+        }
+    } else {
+        return 0;
+    }
+
+    // Duyet tu moc thoi gian lon nhat
+    for (int j = k; j >= k - _t; j--) {
+        // Toa do cua nguoi di bo tai moc tgian j
+        std::vector<std::tuple<std::string, double, double, double>> Aj;
+        for (auto elem : C) {
+            if (get<3>(elem) == j / 10 + 0.0001) {
+                Aj.push_back(elem);
+            }
+        }
+
+        // Neu tai moc j co nguoi
+        // Duyet tu moc tgian nho nhat de tim thoi diem nguoi do vao crossing
+        if (Aj.size() != 0) {
+            appearance++;
+            for (int u = k - _t; u <= j; u++) {
+
+                // Khong can bien de luu A(u->j)
+
+                // Toa do cua nguoi di bo tai moc tgian u
+                std::vector<std::tuple<std::string, double, double, double>> Au;
+                for (auto elem : C) {
+                    if (get<3>(elem) == u / 10 + 0.0001) {
+                        Au.push_back(elem);
+                    }
+                }
+
+                for (auto elem : Au) {
+                    for (auto elem2 : Aj) {
+                        // Neu nguoi di bo xuat hien trong crossing o ca 2 moc tgian j va u
+                        // Va nguoi do chua nam trong danh sach da duyet
+                        if (get<0>(elem).compare(get<0>(elem2)) == 0 && std::find(Avail.begin(), Avail.end(), get<0>(elem)) == Avail.end()) {
+                            Avail.push_back(get<0>(elem));
+                            double d = sqrt((get<1>(elem) - get<1>(elem2)) * (get<1>(elem) - get<1>(elem2))
+                                    + (get<2>(elem) - get<2>(elem2)) * (get<2>(elem) - get<2>(elem2)));
+                            double v = d / (get<3>(elem2) - get<3>(elem));
+                            sum = sum + 6.4 / 2 / v;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    double Pavail = appearance / (_t + 1);
+
+    return Pavail * (sum / Avail.size());
 }
 
 
