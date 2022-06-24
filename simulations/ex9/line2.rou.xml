@@ -42,7 +42,7 @@
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
-    <route edges="-E0 E0" color="yellow" id="route_0"/>
+    <route edges="E0 -E0" color="yellow" id="route_0"/>
     <route edges="E0 E1" color="0,255,140" id="route_1"/>
     <person id="person_0" depart="0.00">
         <walk route="route_0" arrivalPos="0.00"/>

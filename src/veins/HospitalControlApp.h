@@ -12,6 +12,8 @@
 #include "Constant.h"
 
 using namespace omnetpp;
+using people = std::vector<std::tuple<std::string, double, double, double>>;
+using personPosition = std::tuple<std::string, double, double, double>;
 
 namespace veins {
 
@@ -21,7 +23,9 @@ public:
     void finish() override;
     double getAvailablePerdestrian(std::string crossId, double _time);
     double getVeloOfPerdestrian(std::string crossId, double _time);
-    double getDisperseTime(std::string crossId, double _t, double k);
+    double predictDisperseTime(std::string crossId, int _t, int k);
+    people getPeopleByTime(people list, int u);
+    double calculateSum(personPosition elem, personPosition elem2, double L);
 
 protected:
     void onBSM(DemoSafetyMessage* bsm) override;

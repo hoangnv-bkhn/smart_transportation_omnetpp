@@ -103,19 +103,19 @@ void HospitalControlApp::initialize(int stage)
 void HospitalControlApp::finish()
 {
     //Duoc goi khi RSU ket thuc cong viec
-//    EV << "QD: "<< crossings[1].peoples.size() <<endl;
+//    EV << "QD: "<< crossings[1].people.size() <<endl;
     DemoBaseApplLayer::finish();
     double a = getAvailablePerdestrian(":J1_c0_0", 9);
     EV << "Xac suat: "<< a <<endl;
     double b = getVeloOfPerdestrian(":J1_c0_0", 9);
     EV << "Van toc trung binh: "<< b <<endl;
 
-//    for (auto elem : crossings[1].peoples) {
+//    for (auto elem : crossings[1].people) {
 //        EV << "debug111" << endl;
 //        EV << get<0>(elem) << " " << get<1>(elem) << " " << get<2>(elem) << " " << get<3>(elem) << endl;
 //    }
 
-    double t = getDisperseTime(":J1_c0_0", 50, 51);
+    double t = predictDisperseTime(":J0_c0_0", 50, 51);
     EV << "Disperse time: " << t << endl;
 
     // statistics recording goes here
@@ -132,9 +132,9 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
     // code for handling the message goes here, see TraciDemo11p.cc for examples
     cPacket* enc = wsm->getEncapsulatedPacket();
 
-//    EV << "Num 0: "<< crossings[0].peoples.size() <<endl;
-//    EV << "Num 1: "<< crossings[1].peoples.size() <<endl;
-//    EV << "Num 2: "<< crossings[2].peoples.size() <<endl;
+//    EV << "Num 0: "<< crossings[0].people.size() <<endl;
+//    EV << "Num 1: "<< crossings[1].people.size() <<endl;
+//    EV << "Num 2: "<< crossings[2].people.size() <<endl;
 
     if(TraCIDemo11pMessage* bc = dynamic_cast<TraCIDemo11pMessage*>(enc)){
 //        if(strcmp(Constant::FIRST, bc->getDemoData()) == 0){
@@ -174,45 +174,12 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
 //                            EV << std::to_string(coordTraCI.first) + ' ' + std::to_string(coordTraCI.second);
 //                            EV << ' ' +to_string(simTime().dbl()) << std::endl;
 //                            EV << "inside: " << endl;
-                            crossings[i].peoples.push_back(std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
-//                            elem1.peoples.insert(elem1.peoples.end(), std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
-//                            EV << "Hien tai 4: "<< crossings[i].peoples.size() <<endl;
+                            crossings[i].people.push_back(std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
+//                            elem1.people.insert(elem1.people.end(), std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
+//                            EV << "Hien tai 4: "<< crossings[i].people.size() <<endl;
                         }
                     }
                 }
-
-//                for (auto elem: allPeople) {
-//                    std::string personId = elem;
-//                    Coord peoplePosition = traci->getPersonPosition(personId);
-//                    std::pair<double,double> coordTraCI = traci->getTraCIXY(peoplePosition);
-//                    EV << personId + ' ' ;
-////                    EV << peoplePosition;
-//                    EV << std::to_string(coordTraCI.first) + ' ' + std::to_string(coordTraCI.second);
-//                    EV << ' ' +to_string(simTime().dbl()) << std::endl;
-//                    veins::Coord newCoord;
-//                    newCoord.x = coordTraCI.first;
-//                    newCoord.y = coordTraCI.second;
-//                    newCoord.z = 0;
-//                    EV << newCoord <<endl;
-//
-//
-//                    for(int i = 0; i < crossings.size(); i++){
-////                        EV << crossings.at(i).rec.A <<endl;
-//                         if(crossings.at(i).rec.checkInside(newCoord)){
-//                             EV << "inside" <<endl;
-////                             crossings.at(i).peoples.push_back(std::make_tuple(personId, peoplePosition.x, peoplePosition.y, simTime().dbl()));
-//                         }
-//
-////                         EV << crossings.at(i).peoples.at(0) <<endl;
-//
-////                         for (auto [ X, Y, Z, P ] : crossings.at(i).peoples)
-////                         {
-////                               EV<< X << " " << Y << " " << Z << " " <<P <<endl;
-////                         }
-//                    }
-//                }
-
-
 
                 TraCIDemo11pMessage* rsuBeacon = new TraCIDemo11pMessage();
 
@@ -261,7 +228,7 @@ double HospitalControlApp::getAvailablePerdestrian(std::string crossId, double _
 //        EV << (it->rec).A <<endl;
         double pivot = start;
         do {
-            for(auto elem : it->peoples) {
+            for(auto elem : it->people) {
                 if (pivot <= get<3>(elem) && get<3>(elem) < pivot + 0.1) {
 //                    EV << "People: " << get<0>(elem) <<endl;
 //                    EV <<pivot << " " << pivot + 0.1 <<" Count: " << count <<endl;
@@ -295,7 +262,7 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, double _tim
     auto it = find_if(crossings.begin(), crossings.end(), [&crossId](const Crossing& obj) {return obj.id.compare(crossId) == 0;});
     if (it != crossings.end())
     {
-        for(auto elem : it->peoples) {
+        for(auto elem : it->people) {
             if (start <= get<3>(elem) && get<3>(elem) < _time) {
                 personIds.insert(get<0>(elem));
             }
@@ -303,8 +270,8 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, double _tim
         numPeople = personIds.size();
 //        EV <<"Num of People: " << numPeople <<endl;
         for(auto person : personIds) {
-            std::vector<std::tuple<std::string, double, double, double>> tmp;
-            for(auto elem : it->peoples) {
+            people tmp;
+            for(auto elem : it->people) {
                 if(get<0>(elem).compare(person) == 0 && start <= get<3>(elem) && get<3>(elem) <= _time) {
                     tmp.push_back(elem);
                 }
@@ -327,77 +294,58 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, double _tim
     return averageSpeed;
 }
 
-double HospitalControlApp::getDisperseTime(std::string crossId, double _t, double k) {
+people HospitalControlApp::getPeopleByTime(people list, int u) {
+    people A;
+    for (auto elem : list) {
+        if (fabs(get<3>(elem) - u * 0.1) < 0.01) {
+            A.push_back(elem);
+        }
+    }
+    return A;
+}
+
+double HospitalControlApp::calculateSum(personPosition elem, personPosition elem2, double L) {
+    double deltaX = get<1>(elem) - get<1>(elem2);
+    double deltaY = get<2>(elem) - get<2>(elem2);
+    double deltaTime = get<3>(elem2) - get<3>(elem);
+    double d = sqrt(deltaX * deltaX + deltaY * deltaY);
+    double v = d / deltaTime;
+
+    return L * 0.5 / v;
+}
+
+double HospitalControlApp::predictDisperseTime(std::string crossId, int _t, int k) {
     int appearance = 0;
     std::vector<std::string> Avail;
-    double sum;
+    double sum = 0;
 
-    // Tat ca toa do nguoi di bo duoc luu vao peoples cua crossing
-    std::vector<std::tuple<std::string, double, double, double>> C;
     auto it = find_if(crossings.begin(), crossings.end(),
             [&crossId](const Crossing& obj) {return obj.id.compare(crossId) == 0;});
     if (it != crossings.end())
     {
-        for (auto elem : it->peoples) {
-            C.push_back(elem);
-        }
-    } else {
-        return 0;
-    }
+        for (int j = k; j >= k - _t; j--) {
+            people Aj = getPeopleByTime(it->people, j);
 
-    // Duyet tu moc thoi gian lon nhat
-    for (int j = k; j >= k - _t; j--) {
+            if (Aj.size() != 0) {
+                appearance++;
+                for (int u = k - _t; u <= j; u++) {
+                    people Au = getPeopleByTime(it->people, u);
 
-        // Toa do cua nguoi di bo tai moc tgian j
-        std::vector<std::tuple<std::string, double, double, double>> Aj;
-        for (auto elem : C) {
-            if (fabs(get<3>(elem) - (j / 10 + 0.0001)) < 0.01) {
-                Aj.push_back(elem);
-            }
-        }
-
-//        EV << Aj.size() << endl;
-
-        // Neu tai moc j co nguoi
-        // Duyet tu moc tgian nho nhat de tim thoi diem nguoi do vao crossing
-        if (Aj.size() != 0) {
-//            EV << appearance << endl;
-            appearance++;
-            for (int u = k - _t; u <= j; u++) {
-
-                // Khong can bien de luu A(u->j)
-
-                // Toa do cua nguoi di bo tai moc tgian u
-                std::vector<std::tuple<std::string, double, double, double>> Au;
-                for (auto elem : C) {
-                    if (fabs(get<3>(elem) - (u / 10 + 0.0001)) < 0.01) {
-                        Au.push_back(elem);
-                    }
-                }
-
-                for (auto elem : Au) {
-                    for (auto elem2 : Aj) {
-                        // Neu nguoi di bo xuat hien trong crossing o ca 2 moc tgian j va u
-                        // Va nguoi do chua nam trong danh sach da duyet
-                        if (get<0>(elem).compare(get<0>(elem2)) == 0 && std::find(Avail.begin(), Avail.end(), get<0>(elem)) == Avail.end()) {
-                            Avail.push_back(get<0>(elem));
-                            double d = sqrt((get<1>(elem) - get<1>(elem2)) * (get<1>(elem) - get<1>(elem2))
-                                    + (get<2>(elem) - get<2>(elem2)) * (get<2>(elem) - get<2>(elem2)));
-                            double v = d / (get<3>(elem2) - get<3>(elem));
-//                            EV << d << endl;
-//                            EV << v << endl;
-                            sum = sum + 6.4 / 2 / v;
+                    for (auto elem : Au) {
+                        for (auto elem2 : Aj) {
+                            if (get<0>(elem).compare(get<0>(elem2)) == 0 &&
+                                    std::find(Avail.begin(), Avail.end(), get<0>(elem)) == Avail.end()) {
+                                Avail.push_back(get<0>(elem));
+                                sum += calculateSum(elem, elem2, it->length);
+                            }
                         }
                     }
                 }
             }
         }
+        double Pavail = appearance / (_t + 1);
+        return Pavail * (sum / Avail.size());
+    } else {
+        return 0;
     }
-
-    double Pavail = appearance / (_t + 1);
-
-    return Pavail * (sum / Avail.size());
 }
-
-
-
