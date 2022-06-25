@@ -1,4 +1,7 @@
 simulations/aodv
 simulations/veins
 simulations/veins_inet
+simulations/ex9/results
+simulations/test/results
+simulations/hh/results
 out

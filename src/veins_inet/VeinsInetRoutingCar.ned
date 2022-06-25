@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2019 Christoph Sommer <sommer@ccs-labs.org>
+// Copyright (C) 2006-2017 Christoph Sommer <sommer@ccs-labs.org>
 //
 // Documentation for these modules is at http://veins.car2x.org/
 //
@@ -20,26 +20,26 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-#pragma once
+package vanettutorials.veins_inet;
 
-#include "veins/veins.h"
+import inet.networklayer.configurator.ipv4.HostAutoConfigurator;
+import inet.node.inet.AdhocHost;
+import inet.applications.contract.IApp;
 
-// Version number of last release ("major.minor.patch") or an alpha version, if nonzero
-#define VEINS_INET_VERSION_MAJOR 4
-#define VEINS_INET_VERSION_MINOR 0
-#define VEINS_INET_VERSION_PATCH 0
-#define VEINS_INET_VERSION_ALPHA 0
+//
+// Wireless-enabled Host
+//
+module VeinsInetRoutingCar extends AdhocHost
+{
+    parameters:
+        @display("i=device/cellphone");
+    	string router;
+    submodules:
+        routing: <router> like IApp {
+            @display("p=558,307");
+        }
+    connections allowunconnected:
+        routing.socketOut --> at.in++;
+        routing.socketIn <-- at.out++;
+}
 
-// Explicitly check Veins version number
-#if !(VEINS_VERSION_MAJOR == 5 && VEINS_VERSION_MINOR >= 0)
-#error Veins version 5.0 or compatible required
-#endif
-
-// VEINS_INET_API macro. Allows us to use the same .h files for both building a .dll and linking against it
-#if defined(VEINS_INET_EXPORT)
-#define VEINS_INET_API OPP_DLLEXPORT
-#elif defined(VEINS_INET_IMPORT)
-#define VEINS_INET_API OPP_DLLIMPORT
-#else
-#define VEINS_INET_API
-#endif

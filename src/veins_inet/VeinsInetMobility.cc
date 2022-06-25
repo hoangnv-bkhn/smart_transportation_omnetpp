@@ -36,9 +36,11 @@ namespace veins {
 using namespace inet::units::values;
 
 Register_Class(VeinsInetMobility);
+//Define_Module(inet::units::values::VeinsInetMobility);
 
 VeinsInetMobility::VeinsInetMobility()
 {
+    EV<<"Keep moving"<<endl;
 }
 
 VeinsInetMobility::~VeinsInetMobility()
@@ -58,7 +60,7 @@ void VeinsInetMobility::preInitialize(std::string external_id, const inet::Coord
 void VeinsInetMobility::initialize(int stage)
 {
     MobilityBase::initialize(stage);
-
+    EV<<"Keep moving"<<endl;
     // We patch the OMNeT++ Display String to set the initial position. Make sure this works.
     ASSERT(hasPar("initFromDisplayString") && par("initFromDisplayString"));
 }

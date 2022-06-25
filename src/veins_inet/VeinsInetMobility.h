@@ -54,6 +54,7 @@ public:
     /** @brief called by class VeinsInetManager */
     virtual void nextPosition(const inet::Coord& position, std::string road_id, double speed, double angle);
 
+//#if INET_VERSION >= 0x0402
 #if INET_VERSION >= 0x0403
     virtual const inet::Coord& getCurrentPosition() override;
     virtual const inet::Coord& getCurrentVelocity() override;

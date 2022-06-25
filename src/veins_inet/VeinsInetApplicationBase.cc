@@ -74,12 +74,12 @@ void VeinsInetApplicationBase::handleStartOperation(LifecycleOperation* operatio
     const char* interface = par("interface");
     ASSERT(interface[0]);
     IInterfaceTable* ift = getModuleFromPar<IInterfaceTable>(par("interfaceTableModule"), this);
-#if INET_VERSION >= 0x0403
-    NetworkInterface* ie = ift->findInterfaceByName(interface);
-#elif INET_VERSION >= 0x0402
+#if INET_VERSION >= 0x0408
     InterfaceEntry* ie = ift->findInterfaceByName(interface);
+    //NetworkInterface* ie = ift->findInterfaceByName(interface);
 #else
-    InterfaceEntry* ie = ift->getInterfaceByName(interface);
+    //InterfaceEntry* ie = ift->getInterfaceByName(interface);
+    NetworkInterface* ie = ift->findInterfaceByName(interface);
 #endif
     ASSERT(ie);
     socket.setMulticastOutputInterface(ie->getInterfaceId());

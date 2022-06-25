@@ -34,19 +34,25 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
 OBJS = \
-    $O/veins/AGVControlApp.o \
-    $O/veins/Constant.o \
-    $O/veins/Crossing.o \
-    $O/veins/CustomRectangle.o \
-    $O/veins/HospitalControlApp.o \
-    $O/veins/RSUControlApp.o \
-    $O/veins/VehicleControlApp.o \
+    $O/veins_inet/AGVControlApp.o \
+    $O/veins_inet/Constant.o \
+    $O/veins_inet/Crossing.o \
+    $O/veins_inet/CustomRectangle.o \
+    $O/veins_inet/Graph.o \
+    $O/veins_inet/HospitalControlApp.o \
+    $O/veins_inet/IPerson.o \
+    $O/veins_inet/RouteDirection.o \
+    $O/veins_inet/RSUControlApp.o \
+    $O/veins_inet/TraCITestApp.o \
+    $O/veins_inet/TraCITrafficLightApp.o \
+    $O/veins_inet/TraCITrafficLightTestLogic.o \
+    $O/veins_inet/VehicleControlApp.o \
     $O/veins_inet/VeinsInetApplicationBase.o \
     $O/veins_inet/VeinsInetManager.o \
-    $O/veins_inet/VeinsInetManagerBase.o \
-    $O/veins_inet/VeinsInetManagerForker.o \
     $O/veins_inet/VeinsInetMobility.o \
+    $O/veins_inet/VeinsInetPerson.o \
     $O/veins_inet/VeinsInetSampleApplication.o \
+    $O/veins_inet/Zone.o \
     $O/veins_inet/VeinsInetSampleMessage_m.o
 
 # Message files

@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2019 Christoph Sommer <sommer@ccs-labs.org>
+// Copyright (C) 2017 Christoph Sommer <sommer@ccs-labs.org>
 //
 // Documentation for these modules is at http://veins.car2x.org/
 //
@@ -19,27 +19,25 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
+package vanettutorials.simulations.hh;
 
-#pragma once
+import org.car2x.veins.nodes.RSU;
+import org.car2x.veins.nodes.Scenario;
+import org.car2x.veins.nodes.Car;
+import vanettutorials.veins_inet.IPerson;
+import vanettutorials.veins_inet.VeinsInetCar;
+//import inet.physicallayer.ieee80211.packetlevel.Ieee80211ScalarRadioMedium;
 
-#include "veins/veins.h"
-
-// Version number of last release ("major.minor.patch") or an alpha version, if nonzero
-#define VEINS_INET_VERSION_MAJOR 4
-#define VEINS_INET_VERSION_MINOR 0
-#define VEINS_INET_VERSION_PATCH 0
-#define VEINS_INET_VERSION_ALPHA 0
-
-// Explicitly check Veins version number
-#if !(VEINS_VERSION_MAJOR == 5 && VEINS_VERSION_MINOR >= 0)
-#error Veins version 5.0 or compatible required
-#endif
-
-// VEINS_INET_API macro. Allows us to use the same .h files for both building a .dll and linking against it
-#if defined(VEINS_INET_EXPORT)
-#define VEINS_INET_API OPP_DLLEXPORT
-#elif defined(VEINS_INET_IMPORT)
-#define VEINS_INET_API OPP_DLLIMPORT
-#else
-#define VEINS_INET_API
-#endif
+network myHospitalNetwork extends Scenario
+{
+    submodules:
+        //radioMedium: Ieee80211ScalarRadioMedium;
+        rsu[1]: RSU {
+            @display("p=150,140;i=veins/sign/yellowdiamond;is=vs");
+        };
+        //carNode[42]: Car;
+        //personNode[1]: IPerson{
+        //    
+        //};
+        
+}

@@ -50,19 +50,13 @@ bool VeinsInetSampleApplication::startApplication()
             traciVehicle->setSpeed(0);
 
             auto payload = makeShared<VeinsInetSampleMessage>();
+            timestampPayload(payload);
             payload->setChunkLength(B(100));
             payload->setRoadId(traciVehicle->getRoadId().c_str());
-            timestampPayload(payload);
 
             auto packet = createPacket("accident");
             packet->insertAtBack(payload);
             sendPacket(std::move(packet));
-
-            // host should continue after 30s
-            auto callback = [this]() {
-                traciVehicle->setSpeed(-1);
-            };
-            timerManager.create(veins::TimerSpecification(callback).oneshotIn(SimTime(30, SIMTIME_S)));
         };
         timerManager.create(veins::TimerSpecification(callback).oneshotAt(SimTime(20, SIMTIME_S)));
     }
@@ -83,11 +77,15 @@ void VeinsInetSampleApplication::processPacket(std::shared_ptr<inet::Packet> pk)
 {
     auto payload = pk->peekAtFront<VeinsInetSampleMessage>();
 
-    EV_INFO << "Received packet: " << payload << endl;
+    //EV_INFO << "Received packet: " << payload << endl;
+
 
     getParentModule()->getDisplayString().setTagArg("i", 1, "green");
 
+    EV_INFO <<"Change roadID: "<<payload->getRoadId()<<endl;
     traciVehicle->changeRoute(payload->getRoadId(), 999.9);
+    //traciVehicle->changeRoute(payload->getRoadId(), 0.9);
+    //traciVehicle->setRouteID(getParentModule()->getIndex(), payload->getRoadId(), 0.9);
 
     if (haveForwarded) return;
 
