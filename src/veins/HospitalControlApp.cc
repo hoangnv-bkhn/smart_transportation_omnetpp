@@ -152,31 +152,17 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
 
                 std::list<std::string> allPeople = traci->getPersonIds();
 
-//                int numCrossing = (sizeof(crossings)/sizeof(*crossings));
-
-                for(int i = 0; i < crossings.size(); i++){
-                    for (auto elem: allPeople) {
-                        std::string personId = elem;
-                        Coord peoplePosition = traci->getPersonPosition(personId);
-                        std::pair<double,double> coordTraCI = traci->getTraCIXY(peoplePosition);
-//                        EV << personId + ' ' ;
-//    //                    EV << peoplePosition;
-//                        EV << std::to_string(coordTraCI.first) + ' ' + std::to_string(coordTraCI.second);
-//                        EV << ' ' +to_string(simTime().dbl()) << std::endl;
-                        veins::Coord newCoord;
-                        newCoord.x = coordTraCI.first;
-                        newCoord.y = coordTraCI.second;
-                        newCoord.z = 0;
-//                        EV << newCoord <<endl;
+                for (auto elem: allPeople) {
+                    std::string personId = elem;
+                    Coord peoplePosition = traci->getPersonPosition(personId);
+                    std::pair<double,double> coordTraCI = traci->getTraCIXY(peoplePosition);
+                    veins::Coord newCoord;
+                    newCoord.x = coordTraCI.first;
+                    newCoord.y = coordTraCI.second;
+                    newCoord.z = 0;
+                    for(int i = 0; i < crossings.size(); i++) {
                         if (crossings[i].rec.checkInside(newCoord)) {
-//                            EV << crossings[i].id << endl ;
-//                            EV << personId + ' ' ;
-//                            EV << std::to_string(coordTraCI.first) + ' ' + std::to_string(coordTraCI.second);
-//                            EV << ' ' +to_string(simTime().dbl()) << std::endl;
-//                            EV << "inside: " << endl;
                             crossings[i].people.push_back(std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
-//                            elem1.people.insert(elem1.people.end(), std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
-//                            EV << "Hien tai 4: "<< crossings[i].people.size() <<endl;
                         }
                     }
                 }
