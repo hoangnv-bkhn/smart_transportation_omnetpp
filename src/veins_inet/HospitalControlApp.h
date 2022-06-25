@@ -62,8 +62,8 @@ private:
     void readLane(AGV *cur, std::string str);
     double lastUpdate = 0.0;
     long count = 0;
-    double getAvailablePerdestrian(std::string crossId, double _time);
-    double getVeloOfPerdestrian(std::string crossId, double _time);
+    double getAvailablePerdestrian(std::string crossId, std::string name, double _time);
+    double getVeloOfPerdestrian(std::string crossId, std::string name, double _time);
 };
 }
 #endif /* VEINS_INET_HOSPITALCONTROLAPP_H_ */

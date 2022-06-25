@@ -69,8 +69,10 @@ void HospitalControlApp::finish()
 //    double percentage = Constant::TOTAL_WAITING_TIME*10/Constant::TOTAL_TRAVELLING_TIME;
 //    EV<<"% of waiting time: "<<percentage<<endl;
     // statistics recording goes here
-    double a = getAvailablePerdestrian(":J43", 9);
+    double a = getAvailablePerdestrian(":J43", "c1", 9);
     EV << "Xac suat: " <<a << endl;
+    double b = getVeloOfPerdestrian(":J43", "c1", 9);
+    EV << "Average Velocity: " <<b << endl;
 }
 
 void HospitalControlApp::onBSM(DemoSafetyMessage* bsm)
@@ -93,8 +95,6 @@ void HospitalControlApp::onWSM(BaseFrame1609_4 *wsm){
                 traci = Constant::activation->getCommandInterface();
             }
 
-            EV <<123 <<endl;
-
             if(simTime().dbl() - lastUpdate >= 0.2){
                 count++;
                 std::list<std::string> allPeople = traci->getPersonIds();
@@ -108,15 +108,14 @@ void HospitalControlApp::onWSM(BaseFrame1609_4 *wsm){
                     //veins::Coord newCoord;
                     x = coordTraCI.first;
                     y = coordTraCI.second;
-                    EV <<x << " " <<y <<endl;
+//                    EV <<x << " " <<y <<endl;
                     //newCoord.z = 0;
 
                     for(int i = 0; i < crossings.size(); i++){
 //                        EV << "Hello " <<crossings[i].rec->checkInside(x, y)<<endl;
                         if (crossings[i].rec->checkInside(x, y)) {
-                            EV << 123456 << endl;
+//                            EV <<"Nguoi o: "<<crossings[i].id<<endl;
                             crossings[i].peoples.push_back(std::make_tuple(personId, x, y, simTime().dbl()));
-                            EV << "Hien tai 4: "<< crossings[i].peoples.size() <<endl;
                             break;
                         }
                         else if (crossings[i].rec->checkAround(x, y)){
@@ -271,7 +270,7 @@ void HospitalControlApp::readMessage(TraCIDemo11pMessage *bc) {
     }
 }
 
-double HospitalControlApp::getAvailablePerdestrian(std::string crossId, double _time) {
+double HospitalControlApp::getAvailablePerdestrian(std::string crossId, std::string name, double _time) {
     int count = 0;
     double start = 0;
 
@@ -280,13 +279,13 @@ double HospitalControlApp::getAvailablePerdestrian(std::string crossId, double _
     }
     double tmp = (_time - start)/0.1;
     EV << "Start: "<<start << " End: "<< _time <<endl;
-    auto it = find_if(crossings.begin(), crossings.end(), [&crossId](const Crossing& obj) {return obj.id.compare(crossId) == 0;});
+    auto it = find_if(crossings.begin(), crossings.end(), [&crossId, &name](const Crossing& obj) {return obj.id.compare(crossId) == 0 && obj.name.compare(name) == 0;});
     if (it != crossings.end())
     {
         double pivot = start;
         do {
+//            EV << it->peoples.size() <<endl;
             for(auto elem : it->peoples) {
-                EV << 456 <<endl;
                 if (pivot <= std::get<3>(elem) && std::get<3>(elem) < pivot + 0.1) {
 //                    EV << "People: " << get<0>(elem) <<endl;
 //                    EV <<pivot << " " << pivot + 0.1 <<" Count: " << count <<endl;
@@ -297,8 +296,6 @@ double HospitalControlApp::getAvailablePerdestrian(std::string crossId, double _
 //            EV << "Num duration: " << count <<endl;
             pivot = pivot + 0.1;
         } while(pivot < _time && count != tmp);
-    } else {
-        EV << "Khong tim thay" <<endl;
     }
 
 //    EV << "Num duration: " << count <<endl;
@@ -309,7 +306,7 @@ double HospitalControlApp::getAvailablePerdestrian(std::string crossId, double _
 
 }
 
-double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, double _time) {
+double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, std::string name, double _time) {
     double start = 0;
     if (_time - Constant::DELTA_T > 0) {
         start = _time - Constant::DELTA_T;
@@ -319,7 +316,7 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, double _tim
     std::set < std::string > personIds;
     double sum = 0;
     int numPeople = 0;
-    auto it = find_if(crossings.begin(), crossings.end(), [&crossId](const Crossing& obj) {return obj.id.compare(crossId) == 0;});
+    auto it = find_if(crossings.begin(), crossings.end(), [&crossId, &name](const Crossing& obj) {return obj.id.compare(crossId) == 0 && obj.name.compare(name) == 0;});
     if (it != crossings.end())
     {
         for(auto elem : it->peoples) {
