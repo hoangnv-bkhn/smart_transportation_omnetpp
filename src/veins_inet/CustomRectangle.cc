@@ -29,13 +29,13 @@ CustomRectangle::CustomRectangle(std::string points) {
         token = points.substr(0, pos);
         //EV<<" $"<<token<<"$";
         if (i == 0) //this->A = string2Coord(token);
-            this->xMin = std::atof(token.c_str());//std::stof(token);
+            this->xMax = std::atof(token.c_str());//std::stof(token);
         if (i == 1) //this->B = string2Coord(token);
-            this->yMin = std::atof(token.c_str());
-        if (i == 2) //this->C = string2Coord(token);
-            this->xMax = std::atof(token.c_str());
-        if (i == 3) //this->D = string2Coord(token);
             this->yMax = std::atof(token.c_str());
+        if (i == 2) //this->C = string2Coord(token);
+            this->xMin = std::atof(token.c_str());
+        if (i == 3) //this->D = string2Coord(token);
+            this->yMin = std::atof(token.c_str());
 
         points.erase(0, pos + 1);
     }
@@ -92,9 +92,9 @@ bool CustomRectangle::checkAround(double x, double y) {
 }
 
 bool CustomRectangle::checkInside(double x, double y) {
-    if(x >= this->xMax && x <= this->xMin
-            && y <= this->yMin
-            && y >= this->yMax){
+    if(x >= this->xMin && x <= this->xMax
+            && y <= this->yMax
+            && y >= this->yMin){
         return true;
     }
     else return false;
