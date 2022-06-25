@@ -32,7 +32,7 @@ public:
     //std::string to;
     //double length;
     CustomRectangle* rec;
-    std::vector<std::tuple<std::string, double, double, double>> peoples;
+    std::vector<std::tuple<std::string, double, double, double>> people;
 };
 
 #endif /* VEINS_INET_CROSSING_H_ */

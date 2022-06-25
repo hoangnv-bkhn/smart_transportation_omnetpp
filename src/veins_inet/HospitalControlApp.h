@@ -28,7 +28,10 @@
 #include "Crossing.h"
 #include "Graph.h"
 #include <vector>
+
 using namespace omnetpp;
+
+using people = std::vector<std::tuple<std::string, double, double, double>>;
 
 namespace veins {
 
@@ -64,6 +67,9 @@ private:
     long count = 0;
     double getAvailablePerdestrian(std::string crossId, std::string name, double _time);
     double getVeloOfPerdestrian(std::string crossId, std::string name, double _time);
+    double predictDisperseTime(std::string crossId, std::string name, int _t, int k);
+    people getPeopleByTime(people list, int u);
+    double getAverageVelocityByDensity(double density);
 };
 }
 #endif /* VEINS_INET_HOSPITALCONTROLAPP_H_ */

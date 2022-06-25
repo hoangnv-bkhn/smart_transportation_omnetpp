@@ -69,10 +69,14 @@ void HospitalControlApp::finish()
 //    double percentage = Constant::TOTAL_WAITING_TIME*10/Constant::TOTAL_TRAVELLING_TIME;
 //    EV<<"% of waiting time: "<<percentage<<endl;
     // statistics recording goes here
-    double a = getAvailablePerdestrian(":J43", "c1", 9);
-    EV << "Xac suat: " <<a << endl;
-    double b = getVeloOfPerdestrian(":J43", "c1", 9);
-    EV << "Average Velocity: " <<b << endl;
+
+//    double a = getAvailablePerdestrian(":J43", "c1", 9);
+//    EV << "Xac suat: " <<a << endl;
+//    double b = getVeloOfPerdestrian(":J43", "c1", 9);
+//    EV << "Average Velocity: " <<b << endl;
+
+    double t = predictDisperseTime(":J43", "c1", 50, 50);
+    EV << "Disperse time: " << t << endl;
 }
 
 void HospitalControlApp::onBSM(DemoSafetyMessage* bsm)
@@ -96,6 +100,7 @@ void HospitalControlApp::onWSM(BaseFrame1609_4 *wsm){
             }
 
             if(simTime().dbl() - lastUpdate >= 0.2){
+//                EV << "time check: "<<simTime().dbl() << endl;
                 count++;
                 std::list<std::string> allPeople = traci->getPersonIds();
                 double x, y;
@@ -115,17 +120,26 @@ void HospitalControlApp::onWSM(BaseFrame1609_4 *wsm){
 //                        EV << "Hello " <<crossings[i].rec->checkInside(x, y)<<endl;
                         if (crossings[i].rec->checkInside(x, y)) {
 //                            EV <<"Nguoi o: "<<crossings[i].id<<endl;
-                            crossings[i].peoples.push_back(std::make_tuple(personId, x, y, simTime().dbl()));
+                            crossings[i].people.push_back(std::make_tuple(personId, x, y, simTime().dbl()));
                             break;
                         }
                         else if (crossings[i].rec->checkAround(x, y)){
                             break;
+                        }
+                        if (count % 100 == 0) {
+                            for (int j = crossings[i].people.size() - 1; j >= 0; j--) {
+                                if (simTime().dbl() - std::get<3>(crossings[i].people[j]) >= 10) {
+                                    crossings[i].people.erase(std::next(crossings[i].people.begin(), j));
+                                }
+                            }
                         }
                     }
                 }
 
                 lastUpdate = simTime().dbl();
             }
+
+
 
             TraCIDemo11pMessage *rsuBeacon = new TraCIDemo11pMessage();
 
@@ -284,8 +298,8 @@ double HospitalControlApp::getAvailablePerdestrian(std::string crossId, std::str
     {
         double pivot = start;
         do {
-//            EV << it->peoples.size() <<endl;
-            for(auto elem : it->peoples) {
+//            EV << it->people.size() <<endl;
+            for(auto elem : it->people) {
                 if (pivot <= std::get<3>(elem) && std::get<3>(elem) < pivot + 0.1) {
 //                    EV << "People: " << get<0>(elem) <<endl;
 //                    EV <<pivot << " " << pivot + 0.1 <<" Count: " << count <<endl;
@@ -319,7 +333,7 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, std::string
     auto it = find_if(crossings.begin(), crossings.end(), [&crossId, &name](const Crossing& obj) {return obj.id.compare(crossId) == 0 && obj.name.compare(name) == 0;});
     if (it != crossings.end())
     {
-        for(auto elem : it->peoples) {
+        for(auto elem : it->people) {
             if (start <= std::get<3>(elem) && std::get<3>(elem) < _time) {
                 personIds.insert(std::get<0>(elem));
             }
@@ -327,7 +341,7 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, std::string
         numPeople = personIds.size();
         for(auto person : personIds) {
             std::vector<std::tuple<std::string, double, double, double>> tmp;
-            for(auto elem : it->peoples) {
+            for(auto elem : it->people) {
                 if(std::get<0>(elem).compare(person) == 0 && start <= std::get<3>(elem) && std::get<3>(elem) <= _time) {
                     tmp.push_back(elem);
                 }
@@ -348,4 +362,56 @@ double HospitalControlApp::getVeloOfPerdestrian(std::string crossId, std::string
     return averageSpeed;
 }
 
+people HospitalControlApp::getPeopleByTime(people list, int u) {
+    people A;
+    for (auto elem : list) {
+//        EV << "Time person: " << std::get<3>(elem) <<endl;
+        if (fabs(std::get<3>(elem) - u * 0.1 + 0.05) < 0.01) {
+            A.push_back(elem);
+        }
+    }
+    return A;
+}
+
+double HospitalControlApp::getAverageVelocityByDensity(double density) {
+//    y = 0.2 * x^2 - 1.1 * x + 1.7
+    return 0.2 * density * density - 1.1 * density + 1.7;
+}
+
+double HospitalControlApp::predictDisperseTime(std::string crossId, std::string name, int _t, int k) {
+    int appearance = 0;
+    double sum = 0;
+
+    auto it = find_if(crossings.begin(), crossings.end(), [&crossId, &name](const Crossing& obj) {return obj.id.compare(crossId) == 0 && obj.name.compare(name) == 0;});
+    if (it != crossings.end())
+    {
+//        EV << it->people.size() <<endl;
+        for (int j = k; j >= k - _t; j--) {
+            people Aj = getPeopleByTime(it->people, j);
+
+            int numPeople = Aj.size();
+            if (numPeople != 0) {
+                appearance++;
+                double temp = 0;
+                double density = numPeople / it->rec->rectangleArea();
+                double avgVelocity = getAverageVelocityByDensity(density);
+
+                for (auto elem : Aj) {
+                    temp += it->rec->getCrossingLength() * 0.5 / avgVelocity;
+                }
+//                EV << "temp: "<<temp <<endl;
+                sum += temp / numPeople;
+            }
+        }
+
+//        EV << "appearance: "<<appearance <<endl;
+//        EV << "(_t + 1): "<<(_t + 1) <<endl;
+//        EV << "sum: "<<sum <<endl;
+
+        double Pavail = (double)appearance / (_t + 1);
+        return Pavail * sum;
+    } else {
+        return 0;
+    }
+}
 

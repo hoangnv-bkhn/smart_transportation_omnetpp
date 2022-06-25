@@ -58,11 +58,17 @@ veins::Coord CustomRectangle::string2Coord(std::string point) {
     return p;
 }
 
-/*double CustomRectangle::rectangleArea() {
-    double x = A.distance(B);
-    double y = B.distance(C);
+double CustomRectangle::rectangleArea() {
+    double x = this->xMax - this->xMin;
+    double y = this->yMax - this->yMin;
     return x * y;
-}*/
+}
+
+double CustomRectangle::getCrossingLength() {
+    double x = this->xMax - this->xMin;
+    double y = this->yMax - this->yMin;
+    return x > y ? x : y;
+}
 
 double CustomRectangle::triangleArea(veins::Coord A, veins::Coord B, veins::Coord C) {
     double x = A.distance(B);
