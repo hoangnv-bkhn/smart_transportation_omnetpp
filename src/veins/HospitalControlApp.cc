@@ -37,6 +37,7 @@ using namespace std;
 Register_Class(HospitalControlApp);
 
 static std::vector<Crossing> crossings;
+double curTime = 0;
 
 void HospitalControlApp::initialize(int stage)
 {
@@ -152,19 +153,28 @@ void HospitalControlApp::onWSM(BaseFrame1609_4* wsm)
 
                 std::list<std::string> allPeople = traci->getPersonIds();
 
-                for (auto elem: allPeople) {
-                    std::string personId = elem;
-                    Coord peoplePosition = traci->getPersonPosition(personId);
-                    std::pair<double,double> coordTraCI = traci->getTraCIXY(peoplePosition);
-                    veins::Coord newCoord;
-                    newCoord.x = coordTraCI.first;
-                    newCoord.y = coordTraCI.second;
-                    newCoord.z = 0;
-                    for(int i = 0; i < crossings.size(); i++) {
-                        if (crossings[i].rec.checkInside(newCoord)) {
-                            crossings[i].people.push_back(std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
+                if (curTime == 0) curTime = simTime().dbl();
+                else if (simTime().dbl() - curTime - 0.1 >= 0.001) {
+                    for (auto elem: allPeople) {
+                        std::string personId = elem;
+                        Coord peoplePosition = traci->getPersonPosition(personId);
+                        std::pair<double,double> coordTraCI = traci->getTraCIXY(peoplePosition);
+                        veins::Coord newCoord;
+                        newCoord.x = coordTraCI.first;
+                        newCoord.y = coordTraCI.second;
+                        newCoord.z = 0;
+                        for(int i = 0; i < crossings.size(); i++) {
+                            if (crossings[i].rec.checkInside(newCoord)) {
+                                crossings[i].people.push_back(std::make_tuple(personId, newCoord.x, newCoord.y, simTime().dbl()));
+                            }
+
+                            for (int j = crossings[i].people.size() - 1; j >= 0; j--)
+                                if (simTime().dbl() - get<3>(crossings[i].people) >= 10) {
+                                    crossings[i].people.remove(j);
+                                }
                         }
                     }
+                    curTime = simTime().dbl();
                 }
 
                 TraCIDemo11pMessage* rsuBeacon = new TraCIDemo11pMessage();
