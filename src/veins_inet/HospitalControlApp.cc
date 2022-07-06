@@ -75,7 +75,7 @@ void HospitalControlApp::finish()
 //    double b = getVeloOfPerdestrian(":J43", "c1", 9);
 //    EV << "Average Velocity: " <<b << endl;
 
-    double t = predictDisperseTime(":J43", "c1", 50, 50);
+    double t = predictDisperseTime(":J43", 50, 50);
     EV << "Disperse time: " << t << endl;
 }
 
@@ -378,40 +378,30 @@ double HospitalControlApp::getAverageVelocityByDensity(double density) {
     return 0.2 * density * density - 1.1 * density + 1.7;
 }
 
-double HospitalControlApp::predictDisperseTime(std::string crossId, std::string name, int _t, int k) {
-    int appearance = 0;
-    double sum = 0;
-
-    auto it = find_if(crossings.begin(), crossings.end(), [&crossId, &name](const Crossing& obj) {return obj.id.compare(crossId) == 0 && obj.name.compare(name) == 0;});
-    if (it != crossings.end())
-    {
-//        EV << it->people.size() <<endl;
-        for (int j = k; j >= k - _t; j--) {
-            people Aj = getPeopleByTime(it->people, j);
-
-            int numPeople = Aj.size();
-            if (numPeople != 0) {
-                appearance++;
-                double temp = 0;
-                double density = numPeople / it->rec->rectangleArea();
-                double avgVelocity = getAverageVelocityByDensity(density);
-
-                for (auto elem : Aj) {
-                    temp += it->rec->getCrossingLength() * 0.5 / avgVelocity;
-                }
-//                EV << "temp: "<<temp <<endl;
-                sum += temp / numPeople;
-            }
-        }
-
-//        EV << "appearance: "<<appearance <<endl;
-//        EV << "(_t + 1): "<<(_t + 1) <<endl;
-//        EV << "sum: "<<sum <<endl;
-
-        double Pavail = (double)appearance / (_t + 1);
-        return Pavail * sum;
-    } else {
-        return 0;
-    }
+double HospitalControlApp::getFlowRateByDensity(double density) {
+//    y = -0.25 * x^2 + 0.7 * x + 0.3125
+    return -0.25 * density * density + 0.7 * density + 0.3125;
 }
 
+double HospitalControlApp::predictDisperseTime(std::string junctionId, int _t, int k) {
+    double disperseTime = 0;
+    std::vector<Crossing> crossingList;
+    for(int i = 0; i < crossings.size(); i++) {
+        if ( crossings[i].id.compare(junctionId) == 0 ) {
+            crossingList.push_back(crossings[i]);
+        }
+    }
+    for (auto it = crossingList.begin(); it != crossingList.end(); it++){
+        int totalPeople = 0;
+        for (int j = k; j >= k - _t; j--) {
+            totalPeople += getPeopleByTime(it->people, j).size();
+        }
+        double density = (totalPeople / (_t + 1) ) / it->rec->rectangleArea();
+        double flowRate = getFlowRateByDensity(density);
+        double disperseTimeTmp = totalPeople / (flowRate * it->rec->getAisleWidth());
+        if (disperseTimeTmp > disperseTime) {
+            disperseTime = disperseTimeTmp;
+        }
+    }
+    return disperseTime;
+}

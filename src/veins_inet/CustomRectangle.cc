@@ -70,6 +70,13 @@ double CustomRectangle::getCrossingLength() {
     return x > y ? x : y;
 }
 
+double CustomRectangle::getAisleWidth() {
+    double x = this->xMax - this->xMin + 2 * AROUND;
+    double y = this->yMax - this->yMin + 2 * AROUND;
+    return x < y ? x : y;
+}
+
+
 double CustomRectangle::triangleArea(veins::Coord A, veins::Coord B, veins::Coord C) {
     double x = A.distance(B);
     double y = B.distance(C);

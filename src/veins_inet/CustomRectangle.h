@@ -30,6 +30,7 @@ public:
     static double triangleArea(veins::Coord A, veins::Coord B, veins::Coord C);
     double rectangleArea();
     double getCrossingLength();
+    double getAisleWidth();
     bool checkInside(double x, double y);
     bool checkAround(double x, double y);
     virtual ~CustomRectangle();
